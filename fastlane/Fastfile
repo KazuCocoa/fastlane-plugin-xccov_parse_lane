@@ -1,0 +1,3 @@
+lane :test do
+  xccov_parse_lane
+end
