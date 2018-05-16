@@ -6,6 +6,9 @@ module Fastlane
     class XccovParseLaneAction < Action
       def self.run(params)
         UI.message("The xccov_parse_lane plugin is working!")
+
+        message = "| target | line coverage |\n| :----: | :----: |\n"
+        UI.message Helper::XccovParseLaneHelper.run.reduce(message) { |acc, item| acc << "| #{item[0]} | #{item[1]} |\n"}
       end
 
       def self.description
@@ -36,10 +39,7 @@ module Fastlane
       end
 
       def self.is_supported?(platform)
-        # Adjust this if your plugin only works for a particular platform (iOS vs. Android, for example)
-        # See: https://docs.fastlane.tools/advanced/#control-configuration-by-lane-and-by-platform
-        #
-        # [:ios, :mac, :android].include?(platform)
+        [:ios, :mac].include?(platform)
         true
       end
     end
